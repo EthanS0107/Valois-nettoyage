@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Phone } from "lucide-react";
+import { CareerApplicationForm } from "@/components/forms/CareerApplicationForm";
 
 export const metadata: Metadata = {
   title: "Carrieres",
@@ -44,6 +46,25 @@ export default function CarrieresPage() {
           </p>
         </div>
 
+        <article className="rounded-2xl border border-teal-200 bg-teal-50/80 p-5 shadow-sm">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
+            Contact rapide
+          </p>
+          <h2 className="mt-2 text-xl font-semibold text-slate-900">
+            Vous preferez appeler directement ?
+          </h2>
+          <p className="mt-1 text-sm text-slate-700">
+            Notre equipe recrutement vous repond du lundi au vendredi.
+          </p>
+          <a
+            href="tel:+33600000000"
+            className="mt-4 inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
+          >
+            <Phone size={16} aria-hidden="true" />
+            Appeler le 06 00 00 00 00
+          </a>
+        </article>
+
         <div className="grid gap-4">
           {jobs.map((job) => (
             <article
@@ -65,6 +86,21 @@ export default function CarrieresPage() {
             </article>
           ))}
         </div>
+
+        <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+          <h2 className="text-2xl font-semibold text-slate-900">
+            Candidature en ligne
+          </h2>
+          <p className="mt-2 text-sm text-slate-600 sm:text-base">
+            Completez le formulaire ci-dessous pour postuler directement sur le
+            site.
+          </p>
+          <div className="mt-5">
+            <CareerApplicationForm
+              jobs={jobs.map((job) => ({ id: job.id, title: job.title }))}
+            />
+          </div>
+        </article>
       </section>
     </main>
   );

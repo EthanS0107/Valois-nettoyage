@@ -158,15 +158,6 @@ export function Navbar() {
           </Link>
         </div>
       )}
-
-      <div className="pointer-events-none fixed inset-x-0 bottom-4 z-40 px-4 min-[900px]:hidden">
-        <Link
-          href="/devis"
-          className="pointer-events-auto mx-auto block w-full max-w-6xl rounded-full bg-slate-900 px-5 py-3 text-center text-sm font-semibold text-white shadow-[0_16px_38px_-20px_rgba(8,20,45,0.85)]"
-        >
-          Demander un devis gratuit
-        </Link>
-      </div>
     </header>
   );
 }
