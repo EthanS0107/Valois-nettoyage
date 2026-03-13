@@ -1,26 +1,163 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f4f8fb;
+  --foreground: #0a1223;
+  --surface: #ffffff;
+  --primary: #0f766e;
+  --primary-foreground: #ebfffb;
+  --muted: #42526b;
+  --border-soft: rgba(12, 24, 50, 0.14);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-manrope);
+  --font-serif: var(--font-libre-baskerville);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at 8% 5%, rgba(18, 185, 159, 0.18), transparent 28%),
+    radial-gradient(
+      circle at 90% 0%,
+      rgba(11, 121, 234, 0.14),
+      transparent 34%
+    ),
+    linear-gradient(180deg, #f9fdff 0%, #f2f7fb 36%, #f4f8fb 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-manrope), sans-serif;
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(15, 118, 110, 0.22);
+  color: #04191a;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-libre-baskerville), serif;
+}
+
+.grid-pattern {
+  background-image:
+    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+@keyframes water-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(20px, -18px, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes ripple-flow {
+  0% {
+    background-position:
+      0 0,
+      0 0;
+  }
+  100% {
+    background-position:
+      180px 0,
+      -220px 0;
+  }
+}
+
+@keyframes sheen-sweep {
+  0% {
+    transform: translateX(-140%);
+  }
+  100% {
+    transform: translateX(180%);
+  }
+}
+
+@keyframes float-soft {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.water-orb {
+  animation: water-drift 14s ease-in-out infinite;
+}
+
+.water-orb-slow {
+  animation-duration: 19s;
+}
+
+.water-ripple {
+  background-image:
+    radial-gradient(
+      circle at 30% 50%,
+      rgba(14, 165, 233, 0.11) 0 2px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      110deg,
+      rgba(12, 74, 110, 0.07),
+      rgba(12, 74, 110, 0.07) 1px,
+      transparent 1px,
+      transparent 12px
+    );
+  background-size:
+    150px 150px,
+    240px 240px;
+  animation: ripple-flow 12s linear infinite;
+}
+
+.liquid-card {
+  position: relative;
+  isolation: isolate;
+}
+
+.liquid-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.65) 50%,
+    transparent 65%
+  );
+  transform: translateX(-140%);
+  animation: sheen-sweep 3.8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.float-soft {
+  animation: float-soft 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .water-orb,
+  .water-orb-slow,
+  .water-ripple,
+  .liquid-card::after,
+  .float-soft {
+    animation: none;
+  }
 }
